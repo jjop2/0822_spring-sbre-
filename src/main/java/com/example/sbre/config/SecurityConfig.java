@@ -36,7 +36,7 @@ public class SecurityConfig {
 				eh.authenticationEntryPoint(authEntryPoint)
 			)
 			.authorizeHttpRequests(auth ->
-				auth.requestMatchers("/login", "/signup").permitAll()
+				auth.requestMatchers("/login", "/signup", "/").permitAll()
 					.anyRequest().authenticated()
 			);
 		
