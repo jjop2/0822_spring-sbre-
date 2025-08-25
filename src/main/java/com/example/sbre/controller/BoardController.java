@@ -33,10 +33,10 @@ public class BoardController {
 		return new ResponseEntity<>("게시글 등록 완료", HttpStatus.OK);
 	}
 	
-	@GetMapping("/")
-	public ResponseEntity<?> list() {
+	@GetMapping("/board")
+	public ResponseEntity<?> getBoardList() {
 		
-		List<BoardDTO> boardList = boardService.list().stream()
+		List<BoardDTO> boardList = boardService.getBoardList().stream()
 									.map(BoardDTO::new)
 									.collect(Collectors.toList());
 		
@@ -44,7 +44,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/board/{id}")
-	public ResponseEntity<?> getBoard(@PathVariable("id") int id) {
+	public ResponseEntity<?> getBoard(@PathVariable Integer id) {
 		
 		BoardDTO board = boardService.getBoard(id);
 		
@@ -60,7 +60,7 @@ public class BoardController {
 	}
 	
 	@DeleteMapping("/board/{id}")
-	public ResponseEntity<?> deleteBoard(@PathVariable("id") int id) {
+	public ResponseEntity<?> deleteBoard(@PathVariable Integer id) {
 		
 		boardService.deleteBoard(id);
 		

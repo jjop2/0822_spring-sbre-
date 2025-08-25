@@ -3,7 +3,6 @@ package com.example.sbre.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.sbre.domain.Board;
 import com.example.sbre.domain.BoardDTO;
@@ -21,18 +20,17 @@ public class BoardService {
 		boardRepository.save(board);
 	}
 	
-	@Transactional(readOnly = true)
-	public List<Board> list() {
-		return boardRepository.findAll();
+	public List<Board> getBoardList() {
+		return boardRepository.findAllByOrderByIdDesc();
 	}
 	
-	public BoardDTO getBoard(int id) {
+	public BoardDTO getBoard(Integer id) {
 		Board findBoard = boardRepository.findById(id).get();
 		
 		return new BoardDTO(findBoard);
 	}
 	
-	public void updateBoard(int id, Board board) {
+	public void updateBoard(Integer id, Board board) {
 		Board originBoard = boardRepository.findById(id).get();
 		
 		originBoard.setTitle(
@@ -49,7 +47,7 @@ public class BoardService {
 		boardRepository.save(originBoard);
 	}
 	
-	public void deleteBoard(int id) {
+	public void deleteBoard(Integer id) {
 		boardRepository.deleteById(id);
 	}
 	
